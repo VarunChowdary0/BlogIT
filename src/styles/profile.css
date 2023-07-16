@@ -1,0 +1,212 @@
+a{
+    color: white;
+    text-decoration: none;
+}
+html {
+    scroll-behavior: smooth;
+  }
+.profile_block{
+    /* background-color: rgba(223, 51, 51, 0.077); */
+    height: fit-content;
+    width: 100%;
+    padding-bottom: 100px;
+    min-width: 350px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 30px;
+}
+.line_-1{
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    position: absolute;
+    right: 30px;
+    top: 30px;
+}
+.sector_1_profile{
+    height: 50vh;
+    width: 97%;
+    /* background-color: rgba(45, 108, 108, 0.177); */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 30px;
+    padding-top: 20px;
+    position: relative;
+}
+.profile_circle{
+    height: 350px;
+    width: 350px;
+    border-radius: 50%;
+    /* background-color: rgba(240, 255, 255, 0.061); */
+}
+.profile_circle img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    transition: all 0.3s;
+}
+.profile_circle img:hover{
+    scale: 1.1;
+}
+.pic_212 img:active{
+    scale: 1.5;
+}
+.profile_circle img:active
+{
+    scale: 1.5;
+    border-radius: 10px;
+    height: fit-content;
+}
+.sector_2_profile{
+    height: 20vh;
+    /* background-color: rgba(195, 0, 255, 0.054);  */
+    width: 97%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+.fullname{
+    padding: 10px 20px;
+    text-align: center;
+    font-size: 35px;
+}
+.posts_info{
+    margin-top: 25px;
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-around;
+
+}
+.posts{
+    display: flex;
+    flex-direction: column-reverse;
+}
+.div_count{
+    display: flex;
+    flex-direction: row;
+    gap: 7px;
+    padding: 10px 15px;
+    border-radius: 10px;
+    text-align: center;
+    background-color:rgba(21, 21, 21, 0.238);
+}
+.tillt{
+    color: rgb(164, 164, 164);
+}
+.user_name{
+    color: rgb(166, 166, 166);
+}
+.bio_txt{
+    letter-spacing: 0.5px;
+}
+.add_info_block{
+    height: 40px;
+    width: 50%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    padding-bottom: 40px;
+    border-bottom: 0.5px solid rgb(97, 93, 93); 
+}
+.info_add_butt{
+    background-color: rgba(21, 21, 21, 0.238);
+    padding: 10px 15px;
+    border-radius: 7px;
+}
+.info_add_butt:hover{
+    cursor: pointer;
+}
+.sector_3{
+    min-height: 40px;
+    padding-top: 30px;
+    height: fit-content;
+    /* background-color: rgba(255, 255, 255, 0.043); */
+    width: 90%;
+    text-align: center;
+    padding-left: 10%;
+}
+#Followers_div{
+    /* background-color: rgba(255, 255, 255, 0.06); */
+    border-radius: 10px;
+    margin-bottom: 30px;
+}
+.friends_block{
+    gap: 20px;
+}
+.friends_block li{
+    background-color: rgba(255, 255, 255, 0.051);
+    padding: 10px 20px;
+    border-radius: 10px;
+    transition: all 0.3s;
+}
+.friends_block li:hover{
+    background-color:rgba(255, 255, 255, 0.092) ;
+}
+.frnd_121{
+    display: flex;
+    width: 370px;
+    align-items: center;
+}
+.frd_inffo_1{
+    display: flex;
+    flex-direction: column;
+    margin-right: 120px;
+    align-items: flex-start;
+    color: rgb(230, 230, 230);
+    gap: 5px;
+}
+._ful_nam_1{
+    font-size: 15px;
+    color: rgb(154, 154, 154);
+}
+
+
+@media screen and (max-width:700px){
+    body{
+        background-color: black;
+    }
+    .sector_3{
+        padding-left: 0px;
+    }
+    .bio_txt{
+        width: 95%;
+    }
+    .friends_block{
+        margin-bottom: 200px;
+    }
+    .frnd_121{
+        scale: 1.2;
+        gap: 20px;
+    }
+    .follow_icn{
+        margin-top: 0px;
+        font-size: 20px;
+        margin-right: 20px;
+    }
+    .friends_block{
+        gap: 30px;
+    }
+    .info_add_butt{
+        background-color: rgba(114, 114, 114, 0.218);
+    }
+    .div_count
+    {
+        background-color: rgba(101, 101, 101, 0.218);
+    }
+    .friends_block li:hover{
+        background-color:rgba(255, 255, 255, 0.148) ;
+    }
+    .friends_block li{
+        padding: 15px 20px;
+        width: 72%;
+    }
+    .bio_txt{
+        text-align: center;
+    }
+}

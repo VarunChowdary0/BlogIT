@@ -1,0 +1,219 @@
+.pop_up_container{
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.629);
+}
+.post_popUp{
+    position: fixed;
+    height: 70vh;
+    width: 650px;
+    min-width: 200px;
+    min-height: 250px;
+    max-width: 700px;
+    max-height: 500px;
+    background-color: rgb(49, 49, 49);
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+}
+.line_001{
+    background-color: rgba(242, 187, 116, 0);
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right: 20px;
+    border-bottom: 0.5px solid rgb(192, 192, 192);
+}
+.inner_cont_pup{
+    padding: 5px;
+    border-radius: 50%;
+    transition: all 0.3s;
+}
+.inner_cont_pup:active{
+    background-color: rgb(29, 29, 29);
+}
+.line_001 i:hover{
+    cursor: pointer;
+}
+.line_001 i:active{
+    color: orange;
+}
+.line_002{
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    position: relative;
+    padding: 10px 20px;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+.line_002 i{
+    scale: 2.2;
+    position: absolute;
+}
+.inner_line_01{
+    background-color: rgba(0, 255, 255, 0);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    padding: 10px 0px;
+    gap: 20px;
+}
+.inner_line_02{
+    width: 100%;
+    margin-bottom: 10px;
+    height: 150px;
+}
+.inner_line_02 textarea{
+    width: 99%;
+    height: 95%;
+    max-width: 99%;
+    min-width: 99%;
+    max-height: 95%;
+    min-height: 95%;
+    margin-top: 10px;
+    background-color: rgba(19, 101, 101, 0);
+    border: none;
+    color: white;
+    font-size: 16px;
+}
+.inner_line_02 textarea:focus{
+    outline: none;
+}
+.inner_line_03{
+    flex: 1;
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+.inner_line_04{
+    flex: 1;
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+.inner_line_05{
+    padding-left: 10px;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+.inner_line_04 p{
+    margin-right: 7px;
+}
+.selector_access
+{
+    background-color: rgba(0, 0, 0, 0.161);
+    border: 0.5px solid rgb(86, 86, 86) ;
+    padding: 5px 10px;
+    border-radius: 22px;
+    color: white;
+}
+.selector_access:focus{
+    outline: none;
+}
+.post_img::file-selector-button{
+    background-color: rgba(7, 7, 7, 0.097);
+    padding: 5px 10px;
+    border-radius: 15px;
+    color: white;
+    border: 0.5px solid rgb(192, 192, 192);
+    margin-right: 20px;
+    margin-left: 5px;
+}
+.fileInputButton{
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+.location_inputer{
+    background-color: rgba(250, 235, 215, 0);
+    border: none;
+    color: white;
+    width: 100%;
+}
+.location_inputer:focus{
+    outline: none;
+}
+.frd_prf{
+    display: flex;
+  }
+.postButton{
+    height: 35px;
+    width: 60px;
+    background-color: rgb(6, 161, 188);
+    color: white;
+    border: none;
+    font-weight: 700;
+    font-size: 18px;
+    border-radius: 10px;
+    transition: all 0.4s;
+}
+.postButton:active{
+    opacity: 0.5;
+}
+  
+@media screen and (max-width:700px) {
+    .post_popUp{
+        max-width: 1000px;
+        max-height: 1000px;
+        height: fit-content;
+    }
+    .line_001{
+        height: 70px;
+    }
+    .inner_cont_pup{
+        scale: 1.2;
+    }
+    .inner_line_02 textarea{
+        font-size: 22px;
+    }
+    .post_img::file-selector-button{
+        height: 60px;
+        width: 150px;
+        margin-right: 40px;
+        margin-left: 20px;
+        font-size: 20px;
+    }
+    .post_img{
+        font-size: 20px;
+    }
+    .myChoice{
+        margin-right: 45px;
+        height: 30px;
+        width: 30px;
+    }
+    .location_inputer{
+        font-size: 23px;
+    }
+    .postButton{
+        scale: 1.5;
+        margin-bottom: 20px;
+    }
+    .frd_prf img{
+        scale: 1.5;
+    }
+    .frd_prf{
+        margin-right: 20px;
+    }
+    .line_002{
+        padding-left: 40px;
+        padding-top: 20px;
+    }
+    .selector_access{
+        scale: 1.4;
+        margin-bottom: 10px;
+        margin-left: 10px;
+    }
+}

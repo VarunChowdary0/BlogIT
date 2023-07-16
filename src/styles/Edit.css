@@ -1,0 +1,178 @@
+.pop_up_container_edit
+{
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.454);
+    z-index: 3000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.inner_container_edit{
+    position: fixed;
+    height: 70vh;
+    width: 650px;
+    min-width: 200px;
+    min-height: 250px;
+    max-width: 700px;
+    max-height: 500px;
+    background-color: rgb(44, 44, 44);
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+}
+.line_001{
+    background-color: rgba(242, 187, 116, 0);
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right: 20px;
+    border-bottom: 0.5px solid rgb(192, 192, 192);
+}
+.line1_edit{
+    margin-left: 20px;
+    margin-top: 12px;
+}
+.line_2_edit{
+    height: 100%;
+    margin-top: 10px;
+    margin-left: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    margin-bottom: 40px;
+}
+.sub_line_1{
+    width: fit-content;
+    /* position: relative; */
+    padding: 12px 15px;
+    border-radius: 8px;
+    background-color: rgba(0, 0, 0, 0.208);
+}
+.sub_line_1:hover{
+    cursor: pointer;
+}
+.inner_hidden_boxes_edit{
+    position: absolute;
+    height: fit-content;
+    color: rgb(23, 23, 23);
+    width: fit-content;
+    background-color: rgba(255, 255, 255, 0.971);
+    border-radius: 6px;
+    left: 300px;
+    box-shadow: 0 0 10px rgb(36, 36, 36);
+}
+.edi_prf{
+    position: absolute;
+    top: 170px;
+}
+.edi_loc{
+    position: absolute;
+    top: 180px;
+}
+.edit_profile_box{
+    height: 200px;
+    width: 200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    padding-bottom: 20px;
+    padding-top: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+.cancle_outer{
+    position: relative;
+}
+
+.cancle_inner{
+    position: absolute;
+    top: 0;
+    left: 75px;
+    scale: 0.7;
+    transition:  all 0.2s;
+}
+.cancle_inner:hover{
+    scale: 1;
+}
+.cancle_inner:active{
+    scale: 0.5;
+}
+.inp_box_001 input{
+    border: none;
+    margin-top: 10px;
+    letter-spacing: 1px;
+    padding-bottom: 0px;
+    height: 20px;
+    border-bottom: 0.5px solid rgb(154, 152, 152);
+    background-color: rgba(255, 235, 205, 0);
+    transition: height 0.2s;
+}
+.inp_box_001 input:focus{
+    outline: none;
+    height: 30px;
+}
+.save_butt_edit button{
+    border: none;
+    background-color: rgba(2, 101, 144, 0.718);
+    padding: 4px 8px;
+    border-radius: 3px;
+    color: white;
+    transition: all 0.1s;
+}
+.save_butt_edit button:active{
+    scale: 0.9;
+}
+.prof_updater input{
+    width: 90px;
+    height: 48px;
+}
+.prof_updater input::file-selector-button{
+    height:40px;
+    width: 90px;
+    background-color: rgba(121, 121, 121, 0.675);
+    border-radius: 8px;
+    color: white;
+    font-weight: 700;
+    text-align: center;
+    border: none;
+}
+.edit_profile_box p{
+    font-size: 15px;
+}
+.location_info{
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+.fa-location-dot{
+    color: gold;
+}
+.bio_taker{
+    margin-top: 20px;
+    min-height: 90px;
+    max-height: 90px;
+    max-width: 170px;
+    min-width: 170px;
+    border: none;
+    background-color: rgba(25, 25, 25, 0.18);
+    border-radius: 10px;
+    padding: 10px;
+}
+.bio_taker:focus{
+    outline: none;
+}
+@media screen and (max-width:700px) {
+    .line1_edit{
+        margin-left: 35px;
+        margin-top: 20px;
+    }
+    .line_2_edit{
+        margin-left: 43px;
+    }
+}
