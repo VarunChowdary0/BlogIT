@@ -350,7 +350,7 @@ export default function OtherProfile() {
                         {location}
                         </div>
                         <div id="Posts_div" className="sector_3">
-                            <div className="post">
+                        <div className="post">
                             {AllPostsOrder.map((ele,index)=>{
                                     if(ele['postImage']===" "){
                                         return (
