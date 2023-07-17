@@ -1,345 +1,276 @@
-import React from 'react'
-import '../../styles/homePage.css'
+import React, { useContext, useState, useEffect } from 'react';
+import '../../styles/homePage.css';
 import '../../styles/profile.css';
-import { useContext } from 'react';
 import { Globals } from '../universalContent/content_1';
-import { useState,useEffect } from 'react';
 import { json } from 'react-router-dom';
 
-
 export default function OtherProfile() {
+  const { followers_A, addFollowers_A } = useContext(Globals);
+  const { following_A, addFollowing_A } = useContext(Globals);
+  const { viewUser, setViewUser } = useContext(Globals);
 
-    const {followers_A,addFollowers_A}=useContext(Globals)
-    const {following_A,addFollowing_A}=useContext(Globals)
-    const {viewUser,setViewUser}=useContext(Globals);
+  const { hostname } = useContext(Globals);
+  const { uniqueID } = useContext(Globals);
 
-   const {hostname} = useContext(Globals)
-   const  { uniqueID}=useContext(Globals);
-   
+  const [thisUser, postThisUser] = useState({});
 
-   const [thisUser,postThisUser]=useState({});
-
-
-   useEffect(() => {
-    const GetThisUser=(user_uniqueID)=>{
-        fetch(`${hostname}/GetUserInfo`,{
-            method : 'POST',
-            headers : {
-                'Content-Type':'application/json'
-            },
-            body : JSON.stringify({'uniqueID':user_uniqueID})
+  useEffect(() => {
+    const GetThisUser = (user_uniqueID) => {
+      fetch(`${hostname}/GetUserInfo`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ 'uniqueID': user_uniqueID })
+      })
+        .then((res) => {
+          if (res.ok) {
+            console.log("Got data");
+            fetch_Post_Data(user_uniqueID)
+            return res.json()
+          } else {
+            console.log("Not found");
+          }
         })
-        .then((res)=>{
-            if(res.ok)
-            {
-                console.log("Got data");
-                fetch_Post_Data(user_uniqueID)
-                return res.json()
-            }
-            else
-            {
-                console.log("Not found");
-            }
+        .then((data) => {
+          const response = data;
+          changeLoad(false)
+          postThisUser(response);
         })
-        .then((data)=>{
-            const responce=data;
-            changeLoad(false)
-            //console.log(responce);
-            postThisUser(responce);
-        })
-        .catch((err)=>{
-            console.log("Server error");
-        })
-        }
+        .catch((err) => {
+          console.log("Server error");
+        });
+    }
     GetThisUser(eval(viewUser));
   }, []);
-   
-//console.log(viewUser);
 
-  const [AllPostsRaw  , UpdateAllPosts ] = useState([]);
+  const [AllPostsRaw, UpdateAllPosts] = useState([]);
+  const [load, changeLoad] = useState(true);
 
-
-
-  const [load,changeLoad]=useState(true);
-
-
-  const fetch_Post_Data=(user_uniqueID)=>{
-    fetch(`${hostname}/GetUserPosts`,{
-        method : 'POST',
-        headers : {
-            'Content-Type':'application/json'
-        },
-        body : JSON.stringify({'uniqueID_p':user_uniqueID})
+  const fetch_Post_Data = (user_uniqueID) => {
+    fetch(`${hostname}/GetUserPosts`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ 'uniqueID_p': user_uniqueID })
     })
-    .then((res)=>{
-        if(res.ok)
-        {
-           // console.log("Fetched the postID's");
-            return res.json()
+      .then((res) => {
+        if (res.ok) {
+          return res.json()
+        } else {
+          console.log("Something went wrong...");
         }
-        else{
-            console.log("Some-thing went wrong ... ");
+      })
+      .then((data) => {
+        const response = data;
+        UpdateAllPosts(response)
+      })
+      .catch((err) => {
+        console.log("Fetch error while getting PostID's:", err);
+      });
+  }
+
+  const profile_path = thisUser['profile'];
+  const username = thisUser['username'] || 'Not found';
+  const Bio = thisUser['Bio'] || '-';
+  const fullname = `${thisUser['firstname']} ${thisUser['lastname']}` || 'Not Found';
+  const location = thisUser['location'] || '-';
+  const [UserArray, setUserArray] = useState([]);
+  const AllPostsOrder = AllPostsRaw;
+  const followers = thisUser['followers'];
+  const following = thisUser['following'];
+  const { addFollowing } = useContext(Globals);
+  const [recentLikes, modifyRecentLikes] = useState([]);
+  const [recentUnLikes, modifyRecentUnLikes] = useState([]);
+  const [comments, setComments] = useState([]);
+
+  const LikePost = (postId, likedby, index) => {
+    if (likedby && !likedby.includes(username)) {
+      const liker = {
+        postID: postId,
+        likes: {
+          likedBy: [...likedby, username],
+          count: likedby.length + 1
         }
-    })
-    .then((data)=>{
-        //console.log(data[0]);
-        const responce = data;
-        //console.log(responce);
-        UpdateAllPosts(responce)
-    })
-    .catch((err)=>{
-        console.log("Fetch error while getting PostID's : ",err);
-    })
-}
-
-
-    const  profile_path  =  thisUser['profile'];
-    const username= thisUser['username']||'Not found';
-    const Bio= thisUser['Bio']||'-';
-    const fullname= `${thisUser['firstname']} ${thisUser['lastname']}`|| 'Not Found';
-    const location=thisUser['location']||'-';
-    //const {showEditorPopUp,setEditorPopUp}=useContext(Globals);
-    const [UserArray, setUserArray] = useState([]);
-    const AllPostsOrder = AllPostsRaw;
-    const AllPosts = AllPostsOrder.reverse();
-    const followers=thisUser['followers'];
-    const following=thisUser['following'];
-    const {addFollowing}=useContext(Globals)
-    //console.log(thisUser['followers']);
-    // console.log(followers);
-    // console.log(following);
-        const updater=(liker,index)=>{
-        fetch(`${hostname}/update/likes`,{
-            method :'POST',
-            headers : {
-                'Content-Type':'application/json'
-            },
-            body : JSON.stringify(liker)
-          })
-              .then((res)=>{
-                  if(res.ok){ 
-                    // localUpdater(index,liker);
-                      return res.json()
-                  }
-              })
-              .then((data)=>{
-                   console.log(data['message']);
-              })
-              .catch(err=>{
-                  console.log("update error : ",err);
-              })
-    }
-
-    const [recentLikes, modifyRecentLikes] = useState([]);
-    const [recentUnLikes, modifyRecentUnLikes] = useState([]);
-    const LikePost = (postId, likedby, index) => {
-        if(likedby && !likedby.includes(username))
-        {
-            console.log(recentLikes)
-            const liker = {
-              postID: postId,
-              likes: {
-                likedBy: [...likedby, username], // Add the current user's username to the existing likedBy array
-                count: likedby.length + 1 // Increment the likes count by 1
-              }
-            };
-            if( AllPostsOrder[index].likes!==undefined)
-            {
-                AllPostsOrder[index].likes.count++;
-                AllPostsOrder[index].likes.likedBy = [...likedby, username];
-            }
-           // eval(document.querySelectorAll(".modifyLike")[index].innerHTML)++;
-
-            // if (likeElements.length > index) {
-            // const likeCount = likeElements[index];
-           // console.log(likeCount.innerHTML);
-
-          //  console.log(liker);
-            updater(liker,index);
-            modifyRecentLikes(recentLikes.filter((item) => item !== index));
-        }
-        else {
-            console.log("Remove like.");
-           // eval(document.querySelectorAll(".modifyLike")[index].innerHTML)--;
-           AllPostsOrder[index].likes.count--;
-           
-            const indexToRemove = likedby.indexOf(username);
-            if (indexToRemove !== -1) {
-              likedby.splice(indexToRemove, 1);
-            }
-          
-            const liker = {
-              postID: postId,
-              likes: {
-                likedBy: likedby,
-                count: likedby.length
-              }
-            };
-          
-            //console.log(liker);
-            updater(liker,index)
-            
-            modifyRecentUnLikes(recentLikes.filter((item) => item !== index));
-          }
-          
-    };
-
-    const localUpdater=(index,liker)=>{
-        console.log("localUpdater called .")
-        AllPostsOrder[index].likes=liker;
-      //  console.log(AllPostsOrder,AllPosts);
-        UpdateAllPosts(AllPostsOrder.reverse());
-    }
-
-    // const localUpadter2=(AllPostsOrder)=>{
-    //     UpdateAllPosts(AllPostsOrder);
-    // }
- // console.log(AllPosts[0]['comments']['commentBLOCK'][0]['comment'])
- const [comments, setComments] = useState([]);
-
- const AddComment = (postID, index, CB) => {
-    
-    const Mycomment = {
-        username: username,
-        comment: comments[index]
       };
+      if (AllPostsOrder[index].likes !== undefined) {
+        AllPostsOrder[index].likes.count++;
+        AllPostsOrder[index].likes.likedBy = [...likedby, username];
+      }
+      updater(liker, index);
+      modifyRecentLikes(recentLikes.filter((item) => item !== index));
+    } else {
+      console.log("Remove like.");
+      AllPostsOrder[index].likes.count--;
+
+      const indexToRemove = likedby.indexOf(username);
+      if (indexToRemove !== -1) {
+        likedby.splice(indexToRemove, 1);
+      }
+
+      const liker = {
+        postID: postId,
+        likes: {
+          likedBy: likedby,
+          count: likedby.length
+        }
+      };
+
+      updater(liker, index);
+      modifyRecentUnLikes(recentLikes.filter((item) => item !== index));
+    }
+  };
+
+  const updater = (liker, index) => {
+    fetch(`${hostname}/update/likes`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(liker)
+    })
+      .then((res) => {
+        if (res.ok) {
+          return res.json()
+        }
+      })
+      .then((data) => {
+        console.log(data['message']);
+      })
+      .catch(err => {
+        console.log("update error:", err);
+      });
+  }
+
+  const AddComment = (postID, index, CB) => {
+    const Mycomment = {
+      username: username,
+      comment: comments[index]
+    };
     if (comments[index] && comments[index].trim() !== "") {
-     // console.log(comments[index]);
       const commenter = {
         postID: postID,
         comments: {
           commentBLOCK: [
-            ...CB,Mycomment
+            ...CB, Mycomment
           ],
           count: CB.length + 1
         }
       };
       AllPostsOrder[index].comments.count++;
-        AllPostsOrder[index].comments.commentBLOCK = [...AllPostsOrder[index].comments.commentBLOCK, Mycomment];
-       setComments([]);
-        UpdateAllPosts(AllPostsOrder);
+      AllPostsOrder[index].comments.commentBLOCK = [...AllPostsOrder[index].comments.commentBLOCK, Mycomment];
+      setComments([]);
+      UpdateAllPosts(AllPostsOrder);
       console.log(commenter);
-      
-    }   
+    }
   };
-  
 
   const handleInputChange = (index, event) => {
-    const updatedComments = [...comments]; // Create a copy of the comments array
-    updatedComments[index] = event.target.value; // Update the value at the specific index
+    const updatedComments = [...comments];
+    updatedComments[index] = event.target.value;
     setComments(updatedComments);
   };
 
-
-
-// change the total fetch route
-    useEffect(() => {
-      const getUsernames = () => {
-        fetch(`${hostname}/GetUsernames`, {
-          method: 'GET',
+  useEffect(() => {
+    const getUsernames = () => {
+      fetch(`${hostname}/GetUsernames`, {
+        method: 'GET',
+      })
+        .then((res) => {
+          if (res.ok) {
+            return res.json();
+          }
         })
-          .then((res) => {
-            if (res.ok) {
-              return res.json();
-            }
-          })
-          .then((data) => {
-            const userArray = data['document'];
-            setUserArray(userArray);
-           // console.log(UserArray);
-          })
-          .catch((err) => {
-            console.log('Error fetching the user Array:', err);
-          });
-      };
-  
-      getUsernames();
-    }, []);
-    const stopLoad=()=>{
-        changeLoad(false);
+        .then((data) => {
+          const userArray = data['document'];
+          setUserArray(userArray);
+        })
+        .catch((err) => {
+          console.log('Error fetching the user Array:', err);
+        });
+    };
+
+    getUsernames();
+  }, []);
+
+  const stopLoad = () => {
+    changeLoad(false);
+  }
+
+  if (UserArray.length !== 0) {
+    if (load) {
+      // stopLoad();
     }
+  }
 
-    if(UserArray.length!==0)
-    {
-        //console.log(UserArray);
-        if(load)
-        {
-           // stopLoad();
-        }
+  const seeUser = (u_id) => {
+    setViewUser();
+    setViewUser(u_id);
+    localStorage.setItem("SeeUser", JSON.stringify(u_id));
+    if (viewUser !== undefined) {
+      window.location.href = '/view';
     }
+  }
 
-    const seeUser=(u_id)=>{
-        setViewUser();
-        setViewUser(u_id);
-        localStorage.setItem("SeeUser",JSON.stringify(u_id));
-        if(viewUser!==undefined)
-        {
-          window.location.href='/view';
+  const followSomeOne = (u_id) => {
+    console.log(u_id);
+    fetch(`${hostname}/manage/follow`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        uniqueID: uniqueID,
+        newFollowing: u_id
+      })
+    })
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
+        } else {
+          console.log("Failed");
         }
-        //console.log(viewUser)
-       }
-       const followSomeOne = (u_id) => {
-        console.log(u_id);
-        fetch(`${hostname}/manage/follow`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({
-            uniqueID: uniqueID,
-            newFollowing: u_id
-          })
-        })
-          .then((res) => {
-            if (res.ok) {
-            //  console.log("Ok");
-              return res.json();
-            } else {
-              console.log("Failed");
-            }
-          })
-          .then((data) => {
-            const response = data;
-            //console.log(response['data']);
-           addFollowing(response['data']['following']);
-           addFollowing_A(response['data']['following']);
-            localStorage.setItem("userDATA",JSON.stringify(response['data']));
-          })
-          .catch((err) => {
-            console.log("Server Error: ", err);
-          });
-      };
-    
-      const UnfollowSomeOne = (u_id) => {
-        fetch(`${hostname}/manage/unfollow`, {
-          method: 'DELETE',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({
-            uniqueID: uniqueID,
-            unfollowing: u_id
-          })
-        })
-          .then((res) => {
-            if (res.ok) {
-            //  console.log("Ok");
-              return res.json();
-            } else {
-              console.log("Failed");
-            }
-          })
-          .then((data) => {
-            const response = data;
-           // console.log(response['data']);
-            addFollowing(response['data']['following']);
-            addFollowing_A(response['data']['following']);
-            localStorage.setItem("userDATA",JSON.stringify(response['data']));
-          })
-          .catch((err) => {
-            console.log("Server Error: ", err);
-          });
-      };
+      })
+      .then((data) => {
+        const response = data;
+        addFollowing(response['data']['following']);
+        addFollowing_A(response['data']['following']);
+        localStorage.setItem("userDATA", JSON.stringify(response['data']));
+      })
+      .catch((err) => {
+        console.log("Server Error:", err);
+      });
+  };
+
+  const UnfollowSomeOne = (u_id) => {
+    fetch(`${hostname}/manage/unfollow`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        uniqueID: uniqueID,
+        unfollowing: u_id
+      })
+    })
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
+        } else {
+          console.log("Failed");
+        }
+      })
+      .then((data) => {
+        const response = data;
+        addFollowing(response['data']['following']);
+        addFollowing_A(response['data']['following']);
+        localStorage.setItem("userDATA", JSON.stringify(response['data']));
+      })
+      .catch((err) => {
+        console.log("Server Error:", err);
+      });
+  };
 
   return (
     <div className="middle_part">
@@ -393,7 +324,7 @@ export default function OtherProfile() {
                             <div className="posts_info">
                                 <a href="#Posts_div">
                                     <div className="div_count">
-                                        <div className="count">{AllPosts.length}</div>
+                                        <div className="count">{AllPostsOrder.length}</div>
                                         <div className="tillt">POSTS</div>
                                     </div>
                                 </a>
