@@ -8,7 +8,7 @@ body{
         html{
             scroll-behavior: smooth;
         }
-        .post,.post_block{
+        .post,.post_block {
             display: flex;
             flex-direction: column-reverse;
         }
