@@ -115,6 +115,8 @@ export default function EditInfo() {
               updateTheProfileString();
             } else {
               console.log('Failed to upload file');
+              setEdiFlash("Server error .")
+              setTimeout(()=>setEdiFlash(" "),1700)
             }
           })
           .catch((err) => {
