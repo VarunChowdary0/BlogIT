@@ -14,6 +14,7 @@ import AllPosts from './GetAllPosts';
 import OtherProfile from '../homePage/OtherProfile';
 import GetUserInfo from './UpdateUserData';
 import Explore from '../homePage/explore';
+import Suggestions from '../homePage/suggestions';
 import AddPost from '../homePage/AddPost';
 
 //----------------------------------
@@ -45,6 +46,25 @@ const router = createBrowserRouter([
     </div>: <Boiler/>}
     
     </>
+   },
+   {
+    path : '/Add',
+    element:
+    <>
+    {!JSON.parse(localStorage.getItem('signInStatus')) ? 
+  <div className='main'>NOT logged</div>
+  :
+  <div className='main'>
+    <Left/>
+    <Suggestions/>
+    <Right/>
+    <Menu_Mob/>
+    <Blog_float/>
+    <GetPostData/>
+    <GetUserInfo/>
+    <AllPosts/>
+  </div>}
+  </>
    },
     {
       path : "/SignUp",

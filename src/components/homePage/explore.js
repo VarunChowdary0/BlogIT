@@ -8,6 +8,7 @@ export default function Explore() {
   const [AllPostsRaw, UpdateAllPosts] = useState(JSON.parse(localStorage.getItem('AllPosts')) || []);
   const AllPostsOrder = AllPostsRaw;
   const AllPosts = AllPostsOrder;
+  const {viewUser,setViewUser}=useContext(Globals);
   const changeMessage = () => {
     const textInp = document.querySelector('.search_boxi').value;
     if (textInp !== null) {
@@ -129,7 +130,16 @@ export default function Explore() {
     updatedComments[index] = event.target.value;
     setComments(updatedComments);
   };
-
+  const seeUser=(u_id)=>{
+    setViewUser();
+    setViewUser(u_id);
+     localStorage.setItem("SeeUser",JSON.stringify(u_id));
+     if(viewUser!==undefined)
+     {
+       window.location.href='/view';
+     }
+   // console.log(u_id)
+   }
   return (
     <div className="middle_part">
       <div className="inner_Middle">
@@ -148,7 +158,7 @@ export default function Explore() {
                 if (ele['postImage'] === ' ') {
                   return (
                     <li className="img_post" key={index}>
-                      <div className="userINFO_00">
+                      <div className="userINFO_00" onClick={()=>{seeUser(ele['uniqueID_p'])}}>
                         <div className="prof_img_001">
                           <img src={`${hostname}/images/${ele['profile_p']}`} alt="" />
                         </div>
@@ -245,7 +255,7 @@ export default function Explore() {
                 } else {
                   return (
                     <li className="img_post" key={index}>
-                      <div className="userINFO_00">
+                      <div className="userINFO_00" onClick={()=>{seeUser(ele['uniqueID_p'])}}>
                         <div className="prof_img_001">
                           <img src={`${hostname}/images/${ele['profile_p']}`} alt="" />
                         </div>

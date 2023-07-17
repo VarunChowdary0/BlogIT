@@ -6,7 +6,7 @@ export default function Middle() {
   const { hostname } = useContext(Globals);
   const { following, addFollowing } = useContext(Globals);
   const { username } = useContext(Globals);
-
+  const {viewUser,setViewUser}=useContext(Globals);
   const [AllPostsRaw, UpdateAllPosts] = useState(
     JSON.parse(localStorage.getItem('AllPosts')) || []
   );
@@ -113,6 +113,16 @@ export default function Middle() {
     comments[index] = event.target.value;
     setComments([...comments]);
   };
+  const seeUser=(u_id)=>{
+    setViewUser();
+    setViewUser(u_id);
+     localStorage.setItem("SeeUser",JSON.stringify(u_id));
+     if(viewUser!==undefined)
+     {
+       window.location.href='/view';
+     }
+   // console.log(u_id)
+   }
 
   return (
     <div className="middle_part">
@@ -132,7 +142,7 @@ export default function Middle() {
                 if (ele['postImage'] === ' ') {
                   return (
                     <li className="img_post" key={index}>
-                      <div className="userINFO_00">
+                      <div className="userINFO_00" onClick={()=>{seeUser(ele['uniqueID_p'])}}>
                         <div className="prof_img_001">
                           <img src={`${hostname}/images/${ele['profile_p']}`} alt="" />
                         </div>
@@ -229,7 +239,7 @@ export default function Middle() {
                 } else {
                   return (
                     <li className="img_post" key={index}>
-                      <div className="userINFO_00">
+                      <div className="userINFO_00" onClick={()=>{seeUser(ele['uniqueID_p'])}}>
                         <div className="prof_img_001">
                           <img src={`${hostname}/images/${ele['profile_p']}`} alt="" />
                         </div>

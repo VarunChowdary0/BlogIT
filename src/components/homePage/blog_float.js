@@ -11,6 +11,9 @@ export default function Blog_float() {
     console.log("pop_up")
     changePopUpPost(true);
    }
+  const openSugg=()=>{
+    window.location.href='/add';
+  }
   return (
     
     <>
@@ -18,7 +21,7 @@ export default function Blog_float() {
         <i className="fa-solid fa-plus fa-xl"></i>
       </div>
       <div className="top_menu_hider">
-        <div className="hid_menu_left"><i className="fa-solid fa-at fa-xl"></i></div>
+        <div className="hid_menu_left"><i className="fa-solid fa-at fa-xl" onClick={()=>{openSugg()}}></i></div>
         <div className="hid_menu_right">
           <div className="menus_ bell">
                   <i className="fa-solid fa-message fa-2xl"></i>
