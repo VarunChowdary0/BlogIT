@@ -250,6 +250,7 @@ export default function Profile() {
   };
   const logout=()=>{
     localStorage.clear();
+    window.location.href='/';
   }
   return (
     <div className="middle_part">
