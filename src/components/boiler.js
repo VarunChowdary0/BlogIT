@@ -44,7 +44,7 @@ function Boiler() {
               <div className='button_to_go '>
                 <a href='/signUp'>
                   <div className='goto_sign_up '>
-                    <p className='hidden'> Get Started  <i class="fa-solid fa-wifi fa-rotate-90"></i></p>
+                    <p className='hidden'> Get Started  <i className="fa-solid fa-wifi fa-rotate-90"></i></p>
                   </div>
                 </a>
                 <div className='vlnsv'>Register to join</div>

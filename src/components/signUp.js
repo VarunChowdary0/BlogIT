@@ -43,8 +43,9 @@ const Register=()=>{
                   password : pasiword,
                   phonenumber : Phonenumber,
                   email :Email,
-                  //profile : `${uniqueID}_profile`,
-                  profile : profilePic,
+                  
+                  //-> profile : profilePic,
+                  profilePic:'',
                   uniqueID : uniqueID
                 }
                 createUser(infoObj);

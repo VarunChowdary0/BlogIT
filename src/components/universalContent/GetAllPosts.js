@@ -6,7 +6,7 @@ import { useContext } from 'react';
 const  AllPosts=()=>{
     const {uniqueID} = useContext(Globals);
     const { hostname } = useContext (Globals)
-    if(uniqueID!==null)
+    if(uniqueID!==null||undefined)
     {
         const retrive_1=()=>{
             //console.log("retriving _posts. ");
@@ -21,6 +21,7 @@ const  AllPosts=()=>{
                 }
                 else{
                     console.log("Some-thing went wrong ... ");
+                    localStorage.clear();
                 }
             })
             .then((data)=>{

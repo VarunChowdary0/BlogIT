@@ -23,6 +23,8 @@ const GetPostData=()=>{
                     }
                     else{
                         console.log("Some-thing went wrong ... ");
+                        localStorage.clear();
+                        window.location.href='/';
                     }
                 })
                 .then((data)=>{
