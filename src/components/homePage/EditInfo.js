@@ -21,27 +21,27 @@ export default function EditInfo() {
         setEditorPopUp(false);
     }
 
-
+    const [load_202,setLoad202]=useState(false);
     const [showPswdEditorPopUp,setPswdEditor]=useState(false);
+    const [showProfileEditorPopUp,setProfileEditor]=useState(false);
+    const [showLocationEditorPopUp,setLocationEditor]=useState(false);
+    const [showPrivEditorPopUp,setPrivEditor]=useState(false);
+    const [showLocationBioPopUp,setBioEditor]=useState(false)
     const closePopUp_paswd=()=>{
         setPswdEditor(false)
      //   console.log(showPswdEditorPopUp);
     }
 
-    const [showProfileEditorPopUp,setProfileEditor]=useState(false);
     const closePopUp_Profile=()=>{
         setProfileEditor(false);
     }
-    const [showLocationEditorPopUp,setLocationEditor]=useState(false);
     const closePopUp_Locati=()=>{
         setLocationEditor(false);
     }
-    const [showPrivEditorPopUp,setPrivEditor]=useState(false);
     const closePopUp_Priv=()=>{
         setPrivEditor(false);
     }
 
-    const [showLocationBioPopUp,setBioEditor]=useState(false)
     const closePopUp_Bio=()=>{
         setBioEditor(false)
     }
@@ -66,10 +66,12 @@ export default function EditInfo() {
             if (res.ok) {
               console.log('File uploaded successfully');
               setEdiFlash('Image Updated.');
+              setLoad202(false)
               setTimeout(() => {closePopUp_Profile()}, 1000);
               return res.json();
             } else {
               console.log('Failed to upload file');
+              setLoad202(false)
               setEdiFlash('Upload failed.');
               setTimeout(() => setEdiFlash(''), 3000);
             }
@@ -104,6 +106,7 @@ export default function EditInfo() {
       //  setLoad(true);
         const formData = new FormData();
         formData.append('image', selectedFile);
+        setLoad202(true)
         // Send the form data to the backend
         fetch(`${hostname}/User/Image`, {
           method: 'POST',
@@ -136,6 +139,7 @@ export default function EditInfo() {
       //-----------  Change Password .
 
       const UpdatePassword=(info)=>{
+        setLoad202(true)
         fetch(`${hostname}/edit/userInfo/password`,{
             method : 'POST',
             headers : {
@@ -147,6 +151,7 @@ export default function EditInfo() {
             if(res.ok){
                 setEdiFlash("Password has been Changed .");
                 setTimeout(()=>setEdiFlash(" "),1500)
+                setLoad202(false)
                 //return res.json()
             }
             else
@@ -154,6 +159,7 @@ export default function EditInfo() {
                 setEdiFlash("Old password in incorrect .");
                document.querySelector(".old_pwd").value='';
                 setTimeout(()=>setEdiFlash(" "),1000)
+                setLoad202(false)
                 return res.json();
             }
         })
@@ -166,6 +172,7 @@ export default function EditInfo() {
         })
         .catch((err)=>{
             console.log("Error connecting :",err);
+            setLoad202(false)
         })
       }
 
@@ -224,7 +231,9 @@ export default function EditInfo() {
       //--------------- Add location .
 
       const updateLocation=(info)=>{
+        setLoad202(true)
         fetch(`${hostname}/edit/userInfo/location`,{
+
             method : 'POST',
             headers :{
                 'Content-Type':'application/json'
@@ -235,6 +244,7 @@ export default function EditInfo() {
             if(res.ok){
                 setEdiFlash("Location Updated .");
                ChangeLocation(info['location']);
+               setLoad202(false)
                 setTimeout(()=>setEdiFlash(" "),1000)
                 return res.json()
             }
@@ -242,6 +252,7 @@ export default function EditInfo() {
             {
                 setEdiFlash("Try again .");
                 setTimeout(()=>setEdiFlash(" "),1000)
+                setLoad202(false)
             }
         })
         .then((data)=>{
@@ -273,6 +284,7 @@ export default function EditInfo() {
       //---------- Bio
       
       const UpdateBio=(info)=>{
+        setLoad202(true)
         fetch(`${hostname}/edit/userInfo/Bio`,{
             method : 'POST',
             headers : {
@@ -284,11 +296,13 @@ export default function EditInfo() {
             if(res.ok){
                 setEdiFlash("Bio has been Changed .");
                 changeBio(info['Bio']);
+                setLoad202(false)
                 return res.json();
             }
             else
             {
                document.querySelector(".bio_taker").value='';
+               setLoad202(false)
                 return res.json();
             }
         })
@@ -362,6 +376,13 @@ export default function EditInfo() {
                                             <div className='inp_box_001'>
                                                 <input type='password' placeholder='conform password' className='reEnter_pwd'/>
                                             </div>
+                                            { load_202 && <>
+                                                <div className='loader202'>
+                                                    <svg viewBox="25 25 50 50">
+                                                        <circle r="20" cy="50" cx="50"></circle>
+                                                    </svg>
+                                                </div>
+                                            </>}
                                             <p>{editFlasher}</p>
                                             <div className='save_butt_edit'>
                                                 <button onClick={()=>{handlePWchange()}} >Change</button>
@@ -388,6 +409,13 @@ export default function EditInfo() {
                                             <input type='file' name="image" className='newPrf' accept="image/*" onChange={handleFileChange}/>
                                         </div>
                                             <p>{editFlasher}</p>
+                                            { load_202 && <>
+                                                <div className='loader202'>
+                                                    <svg viewBox="25 25 50 50">
+                                                        <circle r="20" cy="50" cx="50"></circle>
+                                                    </svg>
+                                                </div>
+                                            </>}
                                             <div className='save_butt_edit'>
                                                 <button onClick={uploadImage} >Update</button>
                                             </div>
@@ -413,6 +441,13 @@ export default function EditInfo() {
                                             <input type='text' className='location_changer' placeholder={location}/>
                                         </div>
                                             <p>{editFlasher}</p>
+                                            { load_202 && <>
+                                                <div className='loader202'>
+                                                    <svg viewBox="25 25 50 50">
+                                                        <circle r="20" cy="50" cx="50"></circle>
+                                                    </svg>
+                                                </div>
+                                            </>}
                                             <div className='save_butt_edit'>
                                                 <button onClick={handleLocation} >Change</button>
                                             </div>
@@ -423,7 +458,7 @@ export default function EditInfo() {
                                 }
                             </div>
                             <div className='sub_line_1'>
-                                <div onClick={()=>setPrivEditor(true)}>Privacy setting</div>
+                                <div >Privacy setting</div>
                                 {
                                    showPrivEditorPopUp 
                                    ?
@@ -469,6 +504,13 @@ export default function EditInfo() {
                                             <textarea className='bio_taker' placeholder={Bio}></textarea>
                                         </div>
                                             <p>{editFlasher}</p>
+                                            { load_202 && <>
+                                                <div className='loader202'>
+                                                    <svg viewBox="25 25 50 50">
+                                                        <circle r="20" cy="50" cx="50"></circle>
+                                                    </svg>
+                                                </div>
+                                            </>}
                                             <div className='save_butt_edit'>
                                                 <button onClick={()=>handleBio()} >Change</button>
                                             </div>

@@ -30,7 +30,7 @@ export default function Middle() {
         console.log(data['message']);
       })
       .catch((err) => {
-        console.log('update error: ', err);
+        console.log('update error : ', err);
       });
   };
 
@@ -39,27 +39,37 @@ export default function Middle() {
 
   const LikePost = (postId, likedby, index) => {
     if (likedby && !likedby.includes(username)) {
-      AllPostsOrder[index].likes.count++;
-      AllPostsOrder[index].likes.likedBy = [...likedby, username];
+      console.log(recentLikes);
+      const liker = {
+        postID: postId,
+        likes: {
+          likedBy: [...likedby, username],
+          count: likedby.length + 1,
+        },
+      };
+      if (AllPostsOrder[index].likes !== undefined) {
+        AllPostsOrder[index].likes.count++;
+        AllPostsOrder[index].likes.likedBy = [...likedby, username];
+      }
+      updater(liker, index);
+      modifyRecentLikes(recentLikes.filter((item) => item !== index));
     } else {
+      console.log('Remove like.');
       AllPostsOrder[index].likes.count--;
       const indexToRemove = likedby.indexOf(username);
       if (indexToRemove !== -1) {
         likedby.splice(indexToRemove, 1);
       }
+      const liker = {
+        postID: postId,
+        likes: {
+          likedBy: likedby,
+          count: likedby.length,
+        },
+      };
+      updater(liker, index);
+      modifyRecentUnLikes(recentLikes.filter((item) => item !== index));
     }
-
-    const liker = {
-      postID: postId,
-      likes: {
-        likedBy: likedby,
-        count: likedby.length,
-      },
-    };
-
-    updater(liker, index);
-    modifyRecentLikes([...recentLikes.filter((item) => item !== index)]);
-    modifyRecentUnLikes([...recentLikes.filter((item) => item !== index)]);
   };
 
   const commentSender = (commenter) => {
@@ -148,12 +158,12 @@ export default function Middle() {
                         </div>
                         <div className="userNmae322">{ele['fullname']}</div>
                         <div className="Add_frd">
-                          <i className="fa-solid fa-user-plus fa-xl"></i>
+                          <i className="fa-solid fa-ghost fa-xl"></i>
                         </div>
                       </div>
                       <div className="pic_212"></div>
                       <div className="post_info_090">
-                        <p className="discription_001">{ele['blog']}</p>
+                        <pre className="discription_001 blog_nwsn">{ele['blog']}</pre>
                         <div className="responces_009">
                           <div className="likes">
                             <i
@@ -245,14 +255,14 @@ export default function Middle() {
                         </div>
                         <div className="userNmae322">{ele['fullname']}</div>
                         <div className="Add_frd">
-                          <i className="fa-solid fa-user-plus fa-xl"></i>
+                          { <i className="fa-solid fa-ghost fa-xl"></i> }
                         </div>
                       </div>
                       <div className="pic_212">
                         <img src={`${hostname}/images/${ele['postImage']}`} alt="" />
                       </div>
                       <div className="post_info_090">
-                        <p className="discription_001">{ele['blog']}</p>
+                        <pre className="discription_001">{ele['blog']}</pre>
                         <div className="responces_009">
                           <div className="likes">
                             <i

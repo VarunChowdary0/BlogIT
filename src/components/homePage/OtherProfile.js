@@ -368,9 +368,9 @@ export default function OtherProfile() {
                                             </div>
                                             <div className="pic_212"></div>
                                             <div className="post_info_090">
-                                                    <p  className="discription_001">
+                                                    <pre  className="discription_001">
                                                     {ele['blog']}
-                                                    </p>
+                                                    </pre>
                                                 <div className="responces_009">
                                                     <div className="likes">
 
@@ -453,9 +453,9 @@ export default function OtherProfile() {
                                         <div className="pic_212">
                                               <img src={`${hostname}/images/${ele['postImage']}`}  alt=""/>                            </div>
                                         <div className="post_info_090">
-                                          <p  className="discription_001">
+                                          <pre  className="discription_001">
                                                     {ele['blog']}
-                                          </p>
+                                          </pre>
                                             <div className="responces_009">
                                                 <div className="likes">
                                                 <i

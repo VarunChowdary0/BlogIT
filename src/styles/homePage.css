@@ -130,6 +130,17 @@ body{
             /* object-position: top; */
             border-radius: 50%;
         }
+        .post_info_090 pre{
+            white-space: pre-wrap;
+            font-size: 20px;
+            width: 100%;
+        }
+        .post_info_090 pre:hover{
+            cursor: pointer;
+        }
+        .post_info_090{
+            overflow-wrap: break-word;
+        }
         .content_Txt{
             display: flex;
             flex-direction: column;
@@ -158,6 +169,7 @@ body{
             margin-top: 80px;
             scroll-behavior: smooth;
             margin-right: 2px;
+            
         }
         .test_ii{
             height: 10000px;
@@ -638,7 +650,7 @@ body{
             border-top-color: #fff;
             animation: spin 5s cubic-bezier(0.17, 0.49, 0.96, 0.79) infinite;
           }
-          
+
           @keyframes spin {
             from {
               transform: rotate(0deg);
@@ -668,6 +680,12 @@ body{
          }
          .backButt_floter:active{
             background-color: rgba(75, 75, 75, 0.476);
+         }
+         .discription_001{
+            width: 400px;
+         }
+         .blog_nwsn{
+            max-width: 500px;
          }
         @media screen and (max-width:700px) {
             .left_part,.fake_left,.right_part{
@@ -761,6 +779,7 @@ body{
             }
             .discription_001{
                 margin-top: 35px;
+                /* width: 100px; */
             }
             .hid_menu_left,.hid_menu_right{
                 display: flex;
@@ -792,5 +811,10 @@ body{
             }
             .userINFO_00 img{
                 scale: 1.4;
+            }
+            .post_info_090 pre{
+                white-space: pre-wrap;
+                font-size: 30px;
+                width: 95%;
             }
         }

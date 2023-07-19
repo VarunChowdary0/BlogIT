@@ -349,12 +349,12 @@ export default function Profile() {
                             {ele['fullname']}
                           </div>
                           <div className="Add_frd">
-                            <i className="fa-solid fa-user-plus fa-xl"></i>
+                            {/* <i className="fa-solid fa-user-plus fa-xl"></i> */}
                           </div>
                         </div>
                         <div className="pic_212"></div>
                         <div className="post_info_090">
-                          <p className="discription_001">{ele['blog']}</p>
+                          <pre className="discription_001">{ele['blog']}</pre>
                           <div className="responces_009">
                             <div className="likes">
                               <i
@@ -471,7 +471,7 @@ export default function Profile() {
                             {ele['fullname']}
                           </div>
                           <div className="Add_frd">
-                            <i className="fa-solid fa-user-plus fa-xl"></i>
+                            {/* <i className="fa-solid fa-user-plus fa-xl"></i> */}
                           </div>
                         </div>
                         <div className="pic_212">
@@ -481,7 +481,7 @@ export default function Profile() {
                           />
                         </div>
                         <div className="post_info_090">
-                          <p className="discription_001">{ele['blog']}</p>
+                          <pre className="discription_001">{ele['blog']}</pre>
                           <div className="responces_009">
                             <div className="likes">
                               <i

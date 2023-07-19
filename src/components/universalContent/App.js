@@ -34,7 +34,7 @@ const router = createBrowserRouter([
     path : '/',
     element : 
     <> 
-    {eval(JSON.parse(localStorage.getItem('signInStatus'))) ? <div className='main'>
+    {(JSON.parse(localStorage.getItem('signInStatus'))) ? <div className='main'>
       <Left/>
       <GetPostData/>
       <Middle/>
@@ -137,8 +137,8 @@ const router = createBrowserRouter([
 export default function App() {
    //const hostname = `http://localhost:1232`;
 /*    server \|/         local /|\ */
-    const hostname = 'https://blogit-backend-8-jlkvkcl94289082477.onrender.com'
-    //const hostname = 'https://blog-it-backend-sandy.vercel.app';
+    //const hostname = 'https://blogit-backend-8-jlkvkcl94289082477.onrender.com'
+    const hostname = 'https://blog-it-backend-sandy.vercel.app';
     const [serverOnline,setStatus]=useState(false);  
     const [UserArray, setUserArray] = useState([]);
     const [viewUser,setViewUser]=useState(localStorage.getItem('SeeUser')||undefined);
