@@ -248,6 +248,9 @@ export default function Profile() {
         console.log('Server Error: ', err);
       });
   };
+  const logout=()=>{
+    localStorage.clear();
+  }
   return (
     <div className="middle_part">
       {load ? (
@@ -289,7 +292,8 @@ export default function Profile() {
           <div className="test_ii profile_block">
             <div className="sector_1_profile">
               <div className="line_-1">
-                <i className="fa-solid fa-bars"></i>
+              <div className='logOut'><i onClick={logout} className="fa-solid fa-right-from-bracket fa-xs"></i></div>
+                
               </div>
               <div className="profile_circle">
                 <img src={`${hostname}/images/${profile_path}`} alt="profile" />
