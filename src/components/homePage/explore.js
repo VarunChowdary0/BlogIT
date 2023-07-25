@@ -169,7 +169,7 @@ export default function Explore() {
                       </div>
                       <div className="pic_212"></div>
                       <div className="post_info_090">
-                        <pre className="discription_001">{ele['blog']}{console.log(ele['blog'])}</pre>
+                        <pre className="discription_001">{ele['blog']}</pre>
                         <div className="responces_009">
                           <div className="likes">
                             <i
