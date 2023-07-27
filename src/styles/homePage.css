@@ -49,7 +49,7 @@ body{
             margin-left: 10%;
             display: flex;
             flex-direction: column;
-            gap: 30px;
+            gap: 4vh;
             margin-top: 50px;
             font-size: 22px;
         }
@@ -122,6 +122,8 @@ body{
         .prof_1{
             height: 45px;
             width: 45px;
+            background-color: rgb(34, 34, 34);
+            border-radius: 50%;
         }
         .prof_1 img{
             width: 100%;
@@ -129,6 +131,7 @@ body{
             object-fit:cover;
             /* object-position: top; */
             border-radius: 50%;
+            
         }
         .post_info_090 pre{
             white-space: pre-wrap;
@@ -270,6 +273,8 @@ body{
             height: 45px;
             width: 45px;
             margin-right: 20px;
+            border-radius: 50%;
+            background-color: rgb(36, 36, 36);
         }
         .prof_img_001 img{
            width: 100%;
@@ -521,6 +526,8 @@ body{
         .frd_prf{
             width: 45px;
             height: 45px;
+            border-radius: 50%;
+            background-color: rgb(38, 38, 38);
         }
         .frd_prf img{
             width: 100%;
@@ -825,3 +832,8 @@ body{
                 font-size: 14px;
             }
         }
+@media screen and (max-height: 675px) {
+    .menu_contents{
+        gap: 10px;
+    }
+}
