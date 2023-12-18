@@ -658,6 +658,28 @@ body{
             animation: spin 5s cubic-bezier(0.17, 0.49, 0.96, 0.79) infinite;
           }
 
+          .bell:hover .HoverEffect_message{
+            opacity: 1;
+            display: flex;
+          }
+
+          .HoverEffect_message{
+            opacity: 0;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            width: 100px;
+            position: absolute;
+            font-size: 13px;
+            background: #2626266b;
+            top: 40px;
+            border-radius: 10px;
+            padding: 5px;
+            left: 130px;
+          }
+
+
           @keyframes spin {
             from {
               transform: rotate(0deg);

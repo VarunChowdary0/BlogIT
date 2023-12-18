@@ -31,8 +31,8 @@ export default function AddPost() {
 
 
       const takeData=()=>{
-        const blog = document.querySelector('.blog_1').value;
-        const  location= document.querySelector('.location_inputer').value;
+        const blog = document.querySelector('.blog_1').value || " ";
+        const  location= document.querySelector('.location_inputer').value || " ";
         const accessability= document.querySelector('.selector_access').value;
          if(blog.length !== 0)
          {

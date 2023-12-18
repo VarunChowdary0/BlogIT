@@ -41,10 +41,17 @@ export default function Left() {
                     <i className="fa-solid fa-bell"></i>
                     <div className="count_">{Notification}</div>
                     Notification</div>
-                <div className="menus_ bell">
+                <a href='https://chat-room-kohl-pi.vercel.app/o' target='_blank'
+                 className="menus_ bell">
                     <i className="fa-solid fa-message"></i>
                     <div className="msgi count_">{newMessagesCount}</div>
-                    Messages</div>
+                    Messages
+                    <div className=' HoverEffect_message'>
+                            <p>
+                                You will be redirected to our Chatting Platform
+                            </p>
+                    </div>
+                </a>
                 <div className="menus_" onClick={()=>openProfile()}>
                     <i className="fa-solid fa-user"></i>
                     Profile</div>
